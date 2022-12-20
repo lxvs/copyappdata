@@ -146,7 +146,7 @@ if not exist "C:\Users\%to%\" (
     goto end
 )
 if not exist "%list%" (
-    call:err "error: file `%list' not found"
+    call:err "error: file `%list%' not found"
     goto end
 )
 if defined reverse (call:reverse)
