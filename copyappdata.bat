@@ -165,18 +165,24 @@ exit /b
 :doit
 title %_title%: from %from% to %to%
 for /f "usebackq delims=" %%i in ("%list%") do (
-    if exist "%pathfrom%\%%~i\" (
-        if exist "%pathto%\%%~i" (rmdir "%pathto%\%%~i\" 2>nul)
+    if exist "%pathfrom%\%%~i" (
+        if exist "%pathto%\%%~i\" (rmdir "%pathto%\%%~i\" 2>nul)
         if exist "%pathto%\%%~i" (
             if defined backup (call:backup "%%~i" || goto end)
             call:status "removing %%~i"
-            rmdir /s /q "%pathto%\%%~i\" 1>nul || (
-                call:err "error: failed to remove directory `%pathto%\%%~i'"
+            del /s /q /f "%pathto%\%%~i" 1>nul
+            if exist "%pathto%\%%~i" (rmdir /s /q "%pathto%\%%~i")
+            if exist "%pathto%\%%~i" (
+                call:err "error: failed to remove `%pathto%\%%~i'"
                 goto end
             )
         )
         call:status "copying %%~i"
-        xcopy /s /y /h /i "%pathfrom%\%%~i\" "%pathto%\%%~i\"
+        if exist "%pathfrom%\%%~i\" (
+            xcopy /s /y /h /i "%pathfrom%\%%~i\" "%pathto%\%%~i\"
+        ) else (
+            copy /b /y "%pathfrom%\%%~i" "%pathto%\%%~i"
+        )
     ) else (
         >&2 echo warning: source `%%~i' does not exist
     )
