@@ -91,8 +91,8 @@ call:doit || exit /b
 goto end
 
 :setmetadata
-set _version=0.1.0
-set _date=2022-08-18
+set _version=0.2.0
+set _date=2023-02-20
 set "_title=copyappdata %_version%"
 title %_title%
 set "tryformore=Try `copyappdata --help' for more information."
