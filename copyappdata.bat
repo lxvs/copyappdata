@@ -181,6 +181,7 @@ for /f "usebackq delims=" %%i in ("%list%") do (
         if exist "%pathfrom%\%%~i\" (
             xcopy /s /y /h /i /q "%pathfrom%\%%~i\" "%pathto%\%%~i\"
         ) else (
+            mkdir "%pathto%\%%~i" && rmdir "%pathto%\%%~i" 2>nul
             copy /b /y "%pathfrom%\%%~i" "%pathto%\%%~i" 1>nul
         )
     ) else (
