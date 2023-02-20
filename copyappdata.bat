@@ -179,9 +179,9 @@ for /f "usebackq delims=" %%i in ("%list%") do (
         )
         call:status "copying %%~i"
         if exist "%pathfrom%\%%~i\" (
-            xcopy /s /y /h /i "%pathfrom%\%%~i\" "%pathto%\%%~i\"
+            xcopy /s /y /h /i /q "%pathfrom%\%%~i\" "%pathto%\%%~i\"
         ) else (
-            copy /b /y "%pathfrom%\%%~i" "%pathto%\%%~i"
+            copy /b /y "%pathfrom%\%%~i" "%pathto%\%%~i" 1>nul
         )
     ) else (
         >&2 echo warning: source `%%~i' does not exist
