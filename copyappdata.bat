@@ -210,7 +210,7 @@ exit /b %ec%
 
 :version
 @echo copyappdata %_version% ^(%_date%^)
-@echo https://gitlab.com/lzhh/copyappdata
+@echo https://github.com/lxvs/copyappdata
 exit /b 0
 ::version
 
